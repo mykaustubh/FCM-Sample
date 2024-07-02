@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "343119884218",
+    "project_id": "lt-fcm-app",
+    "storage_bucket": "lt-fcm-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343119884218:android:6de0e974dc194ab2e9f783",
+        "android_client_info": {
+          "package_name": "com.lt.fcmsample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoOEtH18wU8uLK6yV29C7YJPB7-t2lr58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
