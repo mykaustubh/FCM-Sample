@@ -21,6 +21,11 @@ import java.util.concurrent.Future;
 import android.graphics.drawable.PictureDrawable;
 import com.caverock.androidsvg.SVG;
 
+import android.os.AsyncTask;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "FCMExample";
@@ -37,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         // Get the FCM token asynchronously
         getTokenAsync();
         loadImages();
+
+        // Replace {54321} with the actual user ID you want to check
+        String userId = "54321";
+        String urlString = "http://172.20.16.10:5000/SecureApp/check-user/" + userId;
+        Log.d(TAG, urlString);
+
+        // Execute the network request
+        new CheckUserTask().execute(urlString);
     }
 
     private void getTokenAsync() {
@@ -112,6 +125,41 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    private static class CheckUserTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String urlString = params[0];
+            try {
+                URL url = new URL(urlString);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                int responseCode = urlConnection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+                    return response.toString();
+                } else {
+                    return "Error: " + responseCode;
+                }
+            } catch (Exception e) {
+                return "Exception: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // Log the result
+            Log.d(TAG, result);
+        }
     }
 
     @Override
