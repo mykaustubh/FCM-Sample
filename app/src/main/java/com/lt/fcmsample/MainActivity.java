@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
 //        Glide.with(this)
 //                .load(url4)
 //                .into(imageView4);
+
+        Log.d(TAG, "Images: " + imageView1 + imageView2 + imageView3 + imageView4);
     }
 
     private void loadSvgImage(String url, ImageView imageView) {
