@@ -43,4 +43,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
+    implementation(libs.glide.core)
+    annotationProcessor(libs.glide.compiler)
+    implementation(libs.androidsvg.core)
 }
